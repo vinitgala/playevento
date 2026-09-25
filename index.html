@@ -642,93 +642,45 @@
 
 
             <script>
-
             (function () {
-
+            
                 var form = document.getElementById("contactForm");
-
                 var submitBtn = document.getElementById("submitBtn");
-
-                var successMessage =
-                    document.getElementById("formSuccess");
-
-                var errorMessage =
-                    document.getElementById("formError");
-
-
-                /*
-                * Listen for response from Google Apps Script
-                */
-
-                window.addEventListener("message", function (event) {
-
-                    if (!event.data) {
-                        return;
-                    }
-
-
-                    /*
-                    * SUCCESS
-                    */
-
-                    if (event.data.status === "success") {
-
-                        form.reset();
-
-                        submitBtn.disabled = false;
-
-                        submitBtn.value = "Send Message";
-
-                        successMessage.style.display = "block";
-
-                        errorMessage.style.display = "none";
-
-                    }
-
-
-                    /*
-                    * ERROR
-                    */
-
-                    if (event.data.status === "error") {
-
-                        submitBtn.disabled = false;
-
-                        submitBtn.value = "Send Message";
-
-                        errorMessage.style.display = "block";
-
-                        successMessage.style.display = "none";
-
-                        console.error(
-                            "PlayEvento form error:",
-                            event.data.message
-                        );
-
-                    }
-
-                });
-
-
-                /*
-                * FORM SUBMISSION
-                */
-
+                var successMessage = document.getElementById("formSuccess");
+                var errorMessage = document.getElementById("formError");
+            
                 form.addEventListener("submit", function () {
-
+            
                     successMessage.style.display = "none";
-
                     errorMessage.style.display = "none";
-
+            
                     submitBtn.disabled = true;
-
                     submitBtn.value = "Sending...";
-
+            
+                    /*
+                     * The form is submitted to Google Apps Script
+                     * through the hidden iframe.
+                     *
+                     * Give Apps Script a moment to process the email,
+                     * then show the success message.
+                     */
+            
+                    setTimeout(function () {
+            
+                        form.reset();
+            
+                        submitBtn.disabled = false;
+                        submitBtn.value = "Send Message";
+            
+                        successMessage.style.display = "block";
+            
+                    }, 2500);
+            
                 });
-
+            
             })();
-
             </script>
+
 
 
 
