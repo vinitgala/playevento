@@ -83,7 +83,7 @@
           <div class="col-md-8" data-aos="fade-up" data-aos-delay="400" style="margin-top: -25%;">
             
             <img src="images/PlayEvento_transparent_bg.png" style="width:100%" alt="Logo">
-            <h3 class="text-white font-weight-light text-uppercase font-weight-bold" data-aos="fade-up" style="margin-top: -40px;
+            <h3 class="text-white font-weight-light text-uppercase font-weight-bold" data-aos="fade-up" style="margin-top: -25px;
     font-family: 'Poppins';"><span style="color:#053766">BUY ●</span> <span style="color: #029c83">RENT</span> <span style="color:#053766">● PLAY</span></h1>
             <h2 class="mb-5" data-aos="fade-up" data-aos-delay="100" style="    margin-top: 50px;
     font-weight: 700;">Interactive Entertainment for <div>Every Occasion</div></h2>
@@ -473,95 +473,132 @@
 
             
 
-            <form action="https://formsubmit.co/info@playevento.com" method="POST" class="p-5 bg-white">
+            
+            <iframe name="contactFormFrame"
+                    id="contactFormFrame"
+                    style="display:none;"></iframe>
 
-              <!-- Email subject -->
-              <input type="hidden" name="_subject" value="New Enquiry from PlayEvento Website">
-
-              <!-- Reply directly to customer's email -->
-              <input type="hidden" name="_replyto" value="">
-
-              <!-- Redirect after successful submission -->
-              <input type="hidden" name="_next" value="https://www.playevento.com/thank-you.html">
-
-              <!-- Optional spam honeypot -->
-              <input type="text" name="_honey" style="display:none">
+            <form id="contactForm"
+                  action="https://script.google.com/macros/s/AKfycbwErh8nwvGugSpc7QeQ1HlNS4CkhF1L_fsB9p7v8wHJc7CzGxnZGLD68m10uplkK0UEJg/exec"
+                  method="POST"
+                  target="contactFormFrame"
+                  class="p-5 bg-white">
 
               <div class="row form-group">
+
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black" for="fname">First Name</label>
-                  <input
-                    type="text"
-                    id="fname"
-                    name="first_name"
-                    class="form-control"
-                    required
-                  >
+                  <input type="text"
+                        id="fname"
+                        name="fname"
+                        class="form-control"
+                        required>
                 </div>
 
                 <div class="col-md-6">
                   <label class="text-black" for="lname">Last Name</label>
-                  <input
-                    type="text"
-                    id="lname"
-                    name="last_name"
-                    class="form-control"
-                    required
-                  >
+                  <input type="text"
+                        id="lname"
+                        name="lname"
+                        class="form-control"
+                        required>
                 </div>
+
               </div>
 
               <div class="row form-group">
                 <div class="col-md-12">
                   <label class="text-black" for="email">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="form-control"
-                    required
-                  >
+                  <input type="email"
+                        id="email"
+                        name="email"
+                        class="form-control"
+                        required>
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-12">
                   <label class="text-black" for="subject">Subject</label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    class="form-control"
-                    required
-                  >
+                  <input type="text"
+                        id="subject"
+                        name="subject"
+                        class="form-control"
+                        required>
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-12">
                   <label class="text-black" for="message">Message</label>
-                  <textarea
-                    name="message"
-                    id="message"
-                    cols="30"
-                    rows="7"
-                    class="form-control"
-                    required
-                  ></textarea>
+                  <textarea name="message"
+                            id="message"
+                            cols="30"
+                            rows="7"
+                            class="form-control"
+                            required></textarea>
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-12">
-                  <input
-                    type="submit"
-                    value="Send Message"
-                    class="btn btn-primary py-2 px-4 text-white"
-                  >
+
+                  <input type="submit"
+                        id="submitBtn"
+                        value="Send Message"
+                        class="btn btn-primary py-2 px-4 text-white">
+
+                  <div id="formSuccess"
+                      style="display:none; margin-top:15px; color:#198754; font-weight:600;">
+                    Thank you! Your message has been sent successfully.
+                    We'll get back to you soon.
+                  </div>
+
+                  <div id="formError"
+                      style="display:none; margin-top:15px; color:#dc3545; font-weight:600;">
+                    Sorry, something went wrong. Please try again.
+                  </div>
+
                 </div>
               </div>
 
             </form>
+
+            <script>
+            document.getElementById("contactForm").addEventListener("submit", function () {
+
+              var form = this;
+              var submitBtn = document.getElementById("submitBtn");
+              var successMessage = document.getElementById("formSuccess");
+              var errorMessage = document.getElementById("formError");
+
+              successMessage.style.display = "none";
+              errorMessage.style.display = "none";
+
+              submitBtn.disabled = true;
+              submitBtn.value = "Sending...";
+
+              /*
+              * The form is submitted to a hidden iframe.
+              * This keeps the visitor on the same PlayEvento page.
+              */
+
+              setTimeout(function () {
+
+                successMessage.style.display = "block";
+
+                form.reset();
+
+                submitBtn.disabled = false;
+                submitBtn.value = "Send Message";
+
+              }, 1200);
+
+            });
+            </script>
+
+
+
           </div>
           <div class="col-md-5">
             
