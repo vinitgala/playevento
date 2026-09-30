@@ -2167,6 +2167,11 @@
                 overflow: hidden;
                 page-break-after: always;
                 break-after: page;
+
+                background-image: url("brochure-bg.png");
+                background-size:cover;
+                background-color: rgb(255 255 255 / 75%);
+                background-blend-mode: lighten;
             }
             .page:last-child {
                 page-break-after: auto;
@@ -2904,7 +2909,6 @@
     <body>
         <div class="brochure">
             <section class="page cover">
-                <div class="cover-decoration"></div>
                 <div class="cover-inner">
                     <img class="cover-logo" src="logo.png" alt="PlayEvento" />
                     <div class="cover-subtitle">Interactive Entertainment for Events</div>
