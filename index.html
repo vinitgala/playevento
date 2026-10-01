@@ -256,6 +256,26 @@
             </div>
           </div>
 
+           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="unit-4 d-flex">
+              <div>
+                 <img src="images/maze_board_kids.png" alt="Wobble Balance Board - Kids" class="img-fluid mb-3">
+                <h3 style="color:#053766">Wobble Balance Board - Kids</h3>
+                <p>A fun balance challenge designed for kids to improve balance, coordination, focus and motor skills while staying active. A simple and engaging game for birthdays, schools, societies and family events.</p>
+              </div>
+            </div>
+          </div>
+
+           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="unit-4 d-flex">
+              <div>
+                 <img src="images/wobble-maze-adults.png" alt="Wobble Balance Board - Adults" class="img-fluid mb-3">
+                <h3 style="color:#053766">Wobble Balance Board - Adults</h3>
+                <p>A fun and challenging balance game where players shift their weight to guide the ball through the maze without losing control. It helps develop balance, coordination, focus and body control, making it an engaging activity for kids and family events.</p>
+              </div>
+            </div>
+          </div>
+
 
 
         </div>
@@ -473,8 +493,6 @@
 
             
 
-            
-            
             <!-- Hidden iframe -->
             <iframe
                 name="contactFormFrame"
@@ -642,45 +660,93 @@
 
 
             <script>
-            (function () {
-            
-                var form = document.getElementById("contactForm");
-                var submitBtn = document.getElementById("submitBtn");
-                var successMessage = document.getElementById("formSuccess");
-                var errorMessage = document.getElementById("formError");
-            
-                form.addEventListener("submit", function () {
-            
-                    successMessage.style.display = "none";
-                    errorMessage.style.display = "none";
-            
-                    submitBtn.disabled = true;
-                    submitBtn.value = "Sending...";
-            
-                    /*
-                     * The form is submitted to Google Apps Script
-                     * through the hidden iframe.
-                     *
-                     * Give Apps Script a moment to process the email,
-                     * then show the success message.
-                     */
-            
-                    setTimeout(function () {
-            
-                        form.reset();
-            
-                        submitBtn.disabled = false;
-                        submitBtn.value = "Send Message";
-            
-                        successMessage.style.display = "block";
-            
-                    }, 2500);
-            
-                });
-            
-            })();
-            </script>
 
+            (function () {
+
+                var form = document.getElementById("contactForm");
+
+                var submitBtn = document.getElementById("submitBtn");
+
+                var successMessage =
+                    document.getElementById("formSuccess");
+
+                var errorMessage =
+                    document.getElementById("formError");
+
+
+                /*
+                * Listen for response from Google Apps Script
+                */
+
+                window.addEventListener("message", function (event) {
+
+                    if (!event.data) {
+                        return;
+                    }
+
+
+                    /*
+                    * SUCCESS
+                    */
+
+                    if (event.data.status === "success") {
+
+                        form.reset();
+
+                        submitBtn.disabled = false;
+
+                        submitBtn.value = "Send Message";
+
+                        successMessage.style.display = "block";
+
+                        errorMessage.style.display = "none";
+
+                    }
+
+
+                    /*
+                    * ERROR
+                    */
+
+                    if (event.data.status === "error") {
+
+                        submitBtn.disabled = false;
+
+                        submitBtn.value = "Send Message";
+
+                        errorMessage.style.display = "block";
+
+                        successMessage.style.display = "none";
+
+                        console.error(
+                            "PlayEvento form error:",
+                            event.data.message
+                        );
+
+                    }
+
+                });
+
+
+                /*
+                * FORM SUBMISSION
+                */
+
+                form.addEventListener("submit", function () {
+
+                    successMessage.style.display = "none";
+
+                    errorMessage.style.display = "none";
+
+                    submitBtn.disabled = true;
+
+                    submitBtn.value = "Sending...";
+
+                });
+
+            })();
+
+            </script>
 
 
 
